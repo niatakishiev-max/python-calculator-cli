@@ -1,4 +1,4 @@
-﻿# Python Calculator CLI
+# Python Calculator CLI
 
 Консольный калькулятор на Python.
 
@@ -34,3 +34,10 @@ python calculator.py
 - цикл `while`
 - обработку ошибок `try / except`
 - работу с пользовательским вводом
+## Тесты
+
+Для запуска автотестов:
+
+```bash
+python -m pytest
+```
