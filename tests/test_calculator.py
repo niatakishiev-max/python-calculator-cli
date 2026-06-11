@@ -1,33 +1,44 @@
+import pytest
+
 from calculator import add, subtract, multiply, divide
 
 
-def test_add():
-    assert add(2, 3) == 5
+@pytest.mark.parametrize("a, b, expected", [
+    (2, 3, 5),
+    (-2, -3, -5),
+    (2.5, 4, 6.5),
+])
+def test_add(a, b, expected):
+    assert add(a, b) == expected
 
 
-def test_subtract():
-    assert subtract(10, 4) == 6
+@pytest.mark.parametrize("a, b, expected", [
+    (10, 4, 6),
+    (3, 10, -7),
+    (-5, -2, -3),
+])
+def test_subtract(a, b, expected):
+    assert subtract(a, b) == expected
 
 
-def test_multiply():
-    assert multiply(3, 4) == 12
+@pytest.mark.parametrize("a, b, expected", [
+    (3, 4, 12),
+    (2.5, 4, 10.0),
+    (-2, 5, -10),
+])
+def test_multiply(a, b, expected):
+    assert multiply(a, b) == expected
 
 
-def test_divide():
-    assert divide(10, 2) == 5
+@pytest.mark.parametrize("a, b, expected", [
+    (10, 2, 5),
+    (9, 3, 3),
+    (7.5, 2.5, 3),
+    (-10, 2, -5),
+])
+def test_divide(a, b, expected):
+    assert divide(a, b) == expected
 
 
 def test_divide_by_zero():
     assert divide(10, 0) is None
-
-
-def test_add_negative_numbers():
-    assert add(-2, -3) == -5
-
-
-def test_multiply_float_numbers():
-    assert multiply(2.5, 4) == 10.0
-
-
-def test_subtract_negative_result():
-    assert subtract(3, 10) == -7
