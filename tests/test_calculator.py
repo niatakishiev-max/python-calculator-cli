@@ -1,6 +1,6 @@
 import pytest
 
-from calculator import add, subtract, multiply, divide
+from calculator import add, subtract, multiply, divide, get_number
 
 
 @pytest.mark.parametrize("a, b, expected", [
@@ -42,3 +42,18 @@ def test_divide(a, b, expected):
 
 def test_divide_by_zero():
     assert divide(10, 0) is None
+
+
+def test_get_number_valid(monkeypatch):
+    monkeypatch.setattr("builtins.input", lambda message: "10")
+
+    assert get_number("Введите число: ") == 10.0
+
+
+def test_get_number_invalid(monkeypatch, capsys):
+    monkeypatch.setattr("builtins.input", lambda message: "abc")
+
+    assert get_number("Введите число: ") is None
+
+    captured = capsys.readouterr()
+    assert "Нужно ввести число" in captured.out
