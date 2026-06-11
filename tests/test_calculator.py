@@ -1,6 +1,6 @@
 import pytest
 
-from calculator import add, subtract, multiply, divide, get_number
+from calculator import add, subtract, multiply, divide, calculate, get_number
 
 
 @pytest.mark.parametrize("a, b, expected", [
@@ -57,3 +57,17 @@ def test_get_number_invalid(monkeypatch, capsys):
 
     captured = capsys.readouterr()
     assert "Нужно ввести число" in captured.out
+
+
+@pytest.mark.parametrize("a, b, operation, expected", [
+    (2, 3, "+", 5),
+    (10, 4, "-", 6),
+    (3, 4, "*", 12),
+    (10, 2, "/", 5),
+])
+def test_calculate(a, b, operation, expected):
+    assert calculate(a, b, operation) == expected
+
+
+def test_calculate_unknown_operation():
+    assert calculate(2, 3, "%") is None

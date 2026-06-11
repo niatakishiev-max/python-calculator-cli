@@ -28,6 +28,19 @@ def divide(a, b):
     return a / b
 
 
+def calculate(a, b, operation):
+    if operation == "+":
+        return add(a, b)
+    elif operation == "-":
+        return subtract(a, b)
+    elif operation == "*":
+        return multiply(a, b)
+    elif operation == "/":
+        return divide(a, b)
+
+    return None
+
+
 def main():
     while True:
         operation = input("Операция (+, -, *, /) или q для выхода: ")
@@ -50,20 +63,12 @@ def main():
         if b is None:
             continue
 
-        if operation == "+":
-            print(add(a, b))
-        elif operation == "-":
-            print(subtract(a, b))
-        elif operation == "*":
-            print(multiply(a, b))
-        elif operation == "/":
-            result = divide(a, b)
+        result = calculate(a, b, operation)
 
-            if result is None:
-                print("На ноль делить нельзя")
-            else:
-                print(result)
-
+        if result is None:
+            print("На ноль делить нельзя")
+        else:
+            print(result)
 
 
 if __name__ == "__main__":
